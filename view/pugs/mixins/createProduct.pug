@@ -1,0 +1,15 @@
+mixin createProduct(product)
+    .col.m6.s12.l4
+        .card
+            .card-image
+                img(src=`/img/${product.image}`)
+            .card-content
+                span.card-title #{product.name}
+                a.black-text.text-darken-3(href='#') ₺#{product.price}
+            .card-action
+                a.white-text.text-darken-3.btn.blue.z-depth-1.waves-light.waves-effect(href=`/products/${product.id}`,style='margin-right:10px') Details
+                form(action='/cart', method='POST')
+                    input#name.validate(type='hidden', name='productId',value=`${product.id}`)
+                    button.white-text.text-darken-3.btn.teal.z-depth-1.waves-light.waves-effect(type='submit', name='submit') Buy
+
+

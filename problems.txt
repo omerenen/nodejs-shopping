@@ -1,0 +1,4 @@
+***mail
+***aynı hesap 2.ye açılıyor
+***cart işlemleri
+***delete order items

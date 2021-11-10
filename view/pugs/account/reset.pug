@@ -1,0 +1,18 @@
+extends ../layouts/main-layout.pug
+block content
+	.container.ic
+		.row
+			if errorMessage
+				.card-panel.red
+					.card-content.white-text
+						span.card-title #{errorMessage}
+			form(action='/reset-password', method='POST')
+				.row
+					.col.s8.ic-col
+						.input-field.col.s12
+							input#email.validate(name ='email',type='email', )
+							label(for='email') Email
+						.input-field.col.s12.right-align
+							button.btn.waves-effect.waves-light(type='submit', name='submit')| Send
+	
+

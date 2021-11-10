@@ -1,0 +1,28 @@
+extends ../layouts/main-layout.pug
+block content
+    .container.ic
+            form(action='/admin/edit-product', method='POST')
+                .row
+                    .col.s8.ic-col
+                        .input-field.col.s12.l6
+                            input#id.validate(name ='id',value=`${product.id}`,type='text') 
+                            label(for='id') Product Id
+                        .input-field.col.s12.l6
+                            input#name.validate(name ='name', value =`${product.name}`,type='text', placeholder='Please Enter A Product Name')
+                            label(for='name') Product Name
+                        .input-field.col.s12.l6
+                            input#image.validate(name='image', value =`${product.image}`,type='text', placeholder='Please Enter A Product Image')
+                            label(for='image') Image
+                        .input-field.col.s12.l6
+                            input#state.validate(name='state', value =`${product.state}`,type='text', placeholder='Please Enter A Product State')
+                            label(for='state') Product Status
+                        .input-field.col.s12.l6
+                            input#price.validate(name='price', value =`${product.price}`, type='number', placeholder='Please Enter A Product Price')
+                            label(for='price') Product Price
+                        .input-field.col.s12.l6
+                            if categories.length >0
+                                select(name='categoryid',class='browser-default')
+                                    each category in categories
+                                        option(value=`${category.id}`, selected=category.id===product.categoryId) #{category.name}
+                            ut-field.col.s12
+                            button.btn.waves-effect.waves-light.blue(type='submit', name='submit')| Send

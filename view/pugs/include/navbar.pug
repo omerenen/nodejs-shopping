@@ -1,0 +1,82 @@
+
+nav.z-depth-1
+    .nav-wrapper.blue.darken-3
+        .container
+            a.sidenav-trigger(href='#', data-target='mobile-nav')
+                i.material-icons menu
+            a.brand-logo(href='/') Shopping
+            
+            ul#nav-mobile.right.hide-on-med-and-down
+                li(class=(path == '/'?'li active waves-effect waves-blue':'li waves-effect waves-blue'))
+                    a(href='/') Home
+                li(class=(path == '/products'?'li active waves-effect waves-blue':'li waves-effect waves-blue'))
+                    a(href='/products') Products
+                    
+                if isAuthenticated
+                    li(class=(path == '/admin/add-product'?'li active waves-effect waves-blue':'li waves-effect waves-blue'))
+                        //-yukarıdaki li active : li kısmı 2. liye li active kodunu ekliyor
+                        a(href='/admin/add-product') Add Product
+
+                    li(class=(path == '/admin/products'?'li active waves-effect waves-blue':'li waves-effect waves-blue'))
+                        a(href='/admin/products') Admin Products
+
+                    li(class=(path == '/cart'?'li active waves-effect waves-blue':'li waves-effect waves-blue'))
+                        a(href='/cart') Cart
+
+                    li(class=(path == '/orders'?'li active waves-effect waves-blue':'li waves-effect waves-blue'))
+                        //-yukarıdaki li active : li kısmı 2. liye li active kodunu ekliyor
+                        a(href='/orders') Orders
+                
+                if isAuthenticated
+                    li(class=(path == '/login'?'li active waves-effect waves-blue':'li waves-effect waves-blue'))
+                        a(href='/logout') Logout
+                else
+                    
+                    li(class=(path == '/login'?'li active waves-effect waves-blue':'li waves-effect waves-blue'))
+                        a(href='/login') Login
+                        
+                    li(class=(path == '/register'?'li active waves-effect waves-blue':'li waves-effect waves-blue'))
+                        a(href='/register') Register
+ul#mobile-nav.sidenav
+    if isAuthenticated
+        li
+            .user-view
+                .background
+                    img(src='/img/trade.jpg' )
+                a(href='#name')
+                    span.white-text.name #{user.name} #{user.surname}
+
+                a(href='#email')
+                    span.white-text.email #{user.email}
+    else
+        li(class=(path == '/login'?'li':'li'))
+            a(href='/login'  class='waves-effect waves-blue') Login
+            
+        li(class=(path == '/register'?'li active ':'li '))
+            a(href='/register'  class='waves-effect waves-blue') Register
+    li(class=(path == '/'?'li active ':'li '))
+        a(href='/') Home
+    li(class=(path == '/products'?'li active ':'li '))
+        a(href='/products') Products
+
+    .no-wave
+        if isAuthenticated
+            li(class=(path == '/admin/add-product'?'li active':'li '))
+                //-yukarıdaki li active : li kısmı 2. liye li active kodunu ekliyor
+                a(href='/admin/add-product' class='waves-effect waves-blue') Add Product
+
+            li(class=(path == '/admin/products'?'li active':'li '))
+                a(href='/admin/products'  class='waves-effect waves-blue') Admin Products
+
+            li(class=(path == '/cart'?'li active ':'li '))
+                a(href='/cart'  class='waves-effect waves-blue') Cart
+
+            li(class=(path == '/orders'?'li active ':'li '))
+                //-yukarıdaki li active : li kısmı 2. liye li active kodunu ekliyor
+                a(href='/orders'  class='waves-effect waves-blue') Orders
+        
+        if isAuthenticated
+            li(class=(path == '/login'?'li active ':'li '))
+                a(href='/logout' class='waves-effect waves-blue') Logout
+        else
+            

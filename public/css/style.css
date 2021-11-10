@@ -1,0 +1,17 @@
+.right-bar{
+    margin-top: 50px;
+}
+.ic{
+    margin-top: 50px;
+}
+.ic-col{
+    margin-right: auto;
+    float:none !important;
+}
+.card-action{
+    padding: 1px;
+    display: inline-flex;
+}
+*{
+    font-family: 'Poppins', sans-serif;
+}

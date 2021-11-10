@@ -1,0 +1,44 @@
+extends ../layouts/main-layout.pug
+
+block content
+    if (action!=='undefined' && action==='edit')
+        .card-panel.light-green
+            .card-content.white-text
+                span.card-title Updated
+
+    if (action!=='undefined'&&action==='delete')
+        .card-panel.red
+            .card-content.white-text
+                span.card-title Deleted
+
+    table.responsive-table
+        thead
+            tr
+                th Image
+                th Name
+                th Status
+                th Price
+                th
+                th
+        tbody
+        if products.length >0
+            each product in products
+                tr
+                    td
+                        img(src=`/img/${product.image}`, width='80') 
+                    td #{product.name}
+                    td #{product.state}
+                    td ₺#{product.price}
+                    td
+                        a.btn-floating.waves-effect.waves-light.teal.pulse(href=`/admin/products/${product.id}`,type='submit', name='submit')
+                            i.material-icons edit
+                    td
+                        form(action='/admin/delete-product', method='POST')
+                            input#name.validate(name='id',value=`${product.id}`,type='text',style='display:none', placeholder='Please Enter A Product State')
+                            button.btn-floating.waves-effect.waves-light.red.pulse(type='submit', name='submit')
+                                i.material-icons delete
+
+                        
+        else
+            h1 No Product
+

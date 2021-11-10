@@ -1,0 +1,54 @@
+extends ../layouts/main-layout.pug
+
+block content
+    if (action!=='undefined' && action==='edit')
+        .card-panel.light-green
+            .card-content.white-text
+                span.card-title Updated
+
+    if (action!=='undefined'&&action==='delete')
+        .card-panel.red
+            .card-content.white-text
+                span.card-title Deleted
+
+    table.responsive-table
+        thead
+            tr
+                th Image
+                th Name
+                th Status
+                th Price
+                th
+                th
+        tbody
+        if products.length >0
+            each product in products
+                tr
+                    td
+                        img(src=`/img/${product.image}`, width='80') 
+                    td #{product.name}
+                    td #{product.state}
+                    td ₺#{product.price}
+                    td #{product.cartitem.quantity}
+                    td
+                        form(action='/delete-cartitem', method='POST')
+                            input#name.validate(name='productid',value=`${product.id}`,type='text',style='display:none', placeholder='Please Enter A Product State')
+                            button.btn-floating.waves-effect.waves-light.red.pulse(type='submit', name='submit')
+                                i.material-icons delete
+        tfoot
+            tr
+                td(colspan = '5')
+                    - var total = 0;
+                    if products.length >0
+                        each product in products
+                            -total += product.price*product.cartitem.quantity;
+                td 
+                    b Toplam 
+                    #{total} TL
+    .container
+        .row
+                            
+            button.white-text.text-darken-3.btn.teal.z-depth-1.waves-light.waves-effect(type='submit', name='submit' style='margin-right:10px;margin-top:20px') Alışverişe Devam Et
+            form(action='/create-order', method='POST')
+                button.white-text.text-darken-3.btn.teal.z-depth-1.waves-light.waves-effect(type='submit', name='submit',style='margin-right:10px;margin-top:20px') Alışverişi Tamamla
+    

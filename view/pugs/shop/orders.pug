@@ -1,0 +1,35 @@
+extends ../layouts/main-layout.pug
+
+block content
+    each order in orders
+        .card
+            .card-content
+                span.card-title(style='font-weight: 700;') Order Id ##{order.id}
+                table.striped
+                    thead
+                        tr
+                            td(style='font-weight: 700;') Image
+                            td(style='font-weight: 700;') Product Name
+                            td(style='font-weight: 700;') Price
+                            td(style='font-weight: 700;') Quantity
+                    tbody
+                        each product in order.products
+                            tr
+                                td
+                                    img(src=`/img/${product.image}`, alt='ürünresmi' width='80')
+                                td #{product.name}
+                                td #{product.orderitem.price} TL
+                                td #{product.orderitem.quantity}
+                    tfoot
+                        tr
+                            td Date
+                            td(colspan='1')
+                            td
+                                - var total = 0;
+                            each product in order.products
+                                - total += (product.price * product.orderitem.quantity)
+                            td
+                                b Total : 
+                                span #{total} TL
+    form(action="/clear-orders",method='POST')
+        button.white-text.text-darken-3.btn.teal.z-depth-1.waves-light.waves-effect.center-align(type='submit', name='submit' style='display:block;float:right') Sepeti Temizle
